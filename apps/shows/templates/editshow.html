@@ -17,6 +17,13 @@
         <div class="jumbotron">
             <h1 class="display-4 text-center">Edit Show {{this_show.id}}</h1>
             <hr class="my-4">
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
             <form action='/shows/{{this_show.id}}/update' method='post'>
                 {% csrf_token %}
                 <div class="form-group row">
@@ -41,6 +48,12 @@
                     <label for="show_description" class="col-2 col-form-label">Description</label>
                     <div class="col-10">
                         <input class="form-control" value="{{this_show.description}}" type="text" name="description" id="show_description">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="show_description" class="col-2 col-form-label">Last Updated:</label>
+                    <div class="col-10">
+                        <p>{{this_show.updated_at}}</p>
                     </div>
                 </div>
                 <hr class="my-4">

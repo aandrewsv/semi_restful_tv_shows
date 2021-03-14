@@ -17,30 +17,37 @@
         <div class="jumbotron">
             <h1 class="display-4 text-center">Add a New Show</h1>
             <hr class="my-4">
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
             <form action='/shows/create' method='post'>
                 {% csrf_token %}
                 <div class="form-group row">
                     <label for="show_title" class="col-2 col-form-label">Title</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" name="title" id="show_title">
+                        <input class="form-control" type="text" name="title" id="show_title" value="{{show_title}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="show_network" class="col-2 col-form-label">Network</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" name="network" id="show_network">
+                        <input class="form-control" type="text" name="network" id="show_network" value="{{show_network}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="show_release_date" class="col-2 col-form-label">Release Date</label>
                     <div class="col-10">
-                        <input class="form-control" type="date" name="release_date" id="show_release_date">
+                        <input class="form-control" type="date" name="release_date" id="show_release_date" value="{{show_release_date}}">
                     </div>
-                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="show_description" class="col-2 col-form-label">Description</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" name="description" id="show_description">
+                        <input class="form-control" type="text" name="description" id="show_description" value="{{show_description}}">
                     </div>
                 </div>
                 <hr class="my-4">
